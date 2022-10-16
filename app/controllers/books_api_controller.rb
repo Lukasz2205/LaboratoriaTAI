@@ -1,4 +1,5 @@
 class BooksApiController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_book, only: %i[ show update destroy ]
 
   def index
@@ -14,7 +15,7 @@ class BooksApiController < ApplicationController
   def create
     @book = Book.new(book_params)
 
-    if @book.save
+    if @book.save!
       render json: { message: 'Successfully created', status: :created, location: @book }
     else
       render json: @book.errors, status: :unprocessable_entity

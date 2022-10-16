@@ -20,6 +20,8 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 gem 'rspec-rails'
 gem 'rswag'
+gem 'rack-cors'
+
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
