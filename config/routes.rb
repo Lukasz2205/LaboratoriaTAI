@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :books
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
   
+  resources :books
   resources :books_api
 end

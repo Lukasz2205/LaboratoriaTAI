@@ -1,0 +1,92 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/books_api":
+    get:
+      summary: list books_api
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create books_api
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                pages:
+                  type: integer
+                price:
+                  type: integer
+                author:
+                  type: string
+              required:
+              - name
+              - description
+              - pages
+              - price
+              - author
+  "/books_api/new":
+    get:
+      summary: new books_api
+      responses:
+        '200':
+          description: successful
+  "/books_api/{id}/edit":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: edit books_api
+      responses:
+        '200':
+          description: successful
+  "/books_api/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show books_api
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update books_api
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update books_api
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete books_api
+      responses:
+        '200':
+          description: successful
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
