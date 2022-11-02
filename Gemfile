@@ -21,6 +21,7 @@ gem "bootsnap", require: false
 gem 'rspec-rails'
 gem 'rswag'
 gem 'rack-cors'
+gem 'jwt'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
