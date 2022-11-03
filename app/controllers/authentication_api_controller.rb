@@ -3,10 +3,9 @@ class AuthenticationApiController < ApplicationController
 
   def login
     @user = User.find_by(login: params[:login])
-
-    if @user && @user.authenticate(params[:password])
-      token = encode_user_data({ user_data: @user.id })
-      render json: {token: token, user: @user, roles: @user.roles }
+    if @user&.authenticate(params[:password])
+      token = encode_user_data({ user_data: @user.id, exp: 5.minutes.from_now.to_i })
+      render json: { token: token, user: @user, roles: @user.roles }
     else
       render json: { message: "invalid credentials" }
     end

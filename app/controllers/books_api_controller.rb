@@ -6,7 +6,7 @@ class BooksApiController < ApplicationController
   def index
     @books = Book.all
 
-    render json: @books
+    render json: { books: @books, user: @user  }
   end
 
   def show
