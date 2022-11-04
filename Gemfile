@@ -23,6 +23,8 @@ gem 'rswag'
 gem 'rack-cors'
 gem 'jwt'
 gem 'simple_form'
+gem 'bulma-rails'
+gem 'sassc-rails'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
