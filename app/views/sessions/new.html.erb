@@ -1,1 +1,17 @@
-Strona logowania dla uzytkownika
+<%= form_with(scope: :session, url: login_path, local: true) do |f| %>
+<form>  
+  <div class="container form-group shadow-lg p-3 mb-5 bg-secondary rounded text-white">
+      <div class="mb-3 row">
+          <%= f.label :login, class: "col-sm-2 mb-3 col-form-label" %>
+        <div class="col-sm-10">
+          <%= f.text_field :login, class: "form-control shadow rounded", placeholder: "email"%>
+        </div>
+          <%= f.label :hasło, class: "col-sm-2 mb-3 col-form-label" %>
+        <div class="col-sm-10">
+          <%= f.password_field :password , class: "form-control mb-3 shadow rounded", placeholder: "Hasło" %>
+        </div>
+      </div>
+      <%= f.submit "Zaloguj", class: "btn btn-outline-light btn-lg" %>
+  </div>
+</form>
+<% end %>
