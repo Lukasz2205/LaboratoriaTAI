@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   
   resources :books
 
+  post '/login', to: 'sessions#create'
+  get 'logout', to: 'sessions#destroy'
+  
   namespace :api do 
     resources :books_api
     resources :users_api, only: %i[index show]
