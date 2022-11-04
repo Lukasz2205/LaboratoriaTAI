@@ -4,6 +4,27 @@ info:
   title: API V1
   version: v1
 paths:
+  "/login":
+    post:
+      summary: Login user
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                login:
+                  type: string
+                password:
+                  type: string
+              required:
+              - token
+              - login
+              - password
   "/books_api":
     get:
       summary: list books_api
@@ -109,3 +130,11 @@ servers:
   variables:
     defaultHost:
       default: localhost:3000
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+secrity:
+  bearerAuth: []
