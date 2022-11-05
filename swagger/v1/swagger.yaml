@@ -4,7 +4,7 @@ info:
   title: API V1
   version: v1
 paths:
-  "/login":
+  "/api/login":
     post:
       summary: Login user
       parameters: []
@@ -25,9 +25,9 @@ paths:
               - token
               - login
               - password
-  "/books_api":
+  "/api/books_api":
     get:
-      summary: list books_api
+      summary: list books_apis
       responses:
         '200':
           description: successful
@@ -59,13 +59,13 @@ paths:
               - pages
               - price
               - author
-  "/books_api/new":
+  "/api/books_api/new":
     get:
       summary: new books_api
       responses:
         '200':
           description: successful
-  "/books_api/{id}/edit":
+  "/api/books_api/{id}/edit":
     parameters:
     - name: id
       in: path
@@ -78,7 +78,7 @@ paths:
       responses:
         '200':
           description: successful
-  "/books_api/{id}":
+  "/api/books_api/{id}":
     parameters:
     - name: id
       in: path
@@ -106,13 +106,13 @@ paths:
       responses:
         '200':
           description: successful
-  "/users_api":
+  "/api/users_api":
     get:
       summary: list users_apis
       responses:
         '200':
           description: successful
-  "/users_api/{id}":
+  "/api/users_api/{id}":
     parameters:
     - name: id
       in: path

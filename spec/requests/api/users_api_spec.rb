@@ -1,8 +1,8 @@
 require 'swagger_helper'
 
-RSpec.describe 'users_api', type: :request do
+RSpec.describe 'api/users_api', type: :request do
 
-  path '/users_api' do
+  path '/api/users_api' do
 
     get('list users_apis') do
       response(200, 'successful') do
@@ -19,7 +19,7 @@ RSpec.describe 'users_api', type: :request do
     end
   end
 
-  path '/users_api/{id}' do
+  path '/api/users_api/{id}' do
     # You'll want to customize the parameter types...
     parameter name: 'id', in: :path, type: :string, description: 'id'
 

@@ -1,10 +1,10 @@
 require 'swagger_helper'
 
-RSpec.describe 'books_api', type: :request do
+RSpec.describe 'api/books_api', type: :request do
 
-  path '/books_api' do
+  path '/api/books_api' do
 
-    get('list books_api') do
+    get('list books_apis') do
       response(200, 'successful') do
 
         after do |example|
@@ -44,7 +44,7 @@ RSpec.describe 'books_api', type: :request do
     end
   end
 
-  path '/books_api/new' do
+  path '/api/books_api/new' do
 
     get('new books_api') do
       response(200, 'successful') do
@@ -61,7 +61,7 @@ RSpec.describe 'books_api', type: :request do
     end
   end
 
-  path '/books_api/{id}/edit' do
+  path '/api/books_api/{id}/edit' do
     # You'll want to customize the parameter types...
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
@@ -81,7 +81,7 @@ RSpec.describe 'books_api', type: :request do
     end
   end
 
-  path '/books_api/{id}' do
+  path '/api/books_api/{id}' do
     # You'll want to customize the parameter types...
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
