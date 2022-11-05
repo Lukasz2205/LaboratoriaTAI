@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  resources :homes
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
   
+  root 'home#index'
+
   resources :books
 
   get '/login', to: 'sessions#new'
@@ -14,6 +17,4 @@ Rails.application.routes.draw do
 
     post '/login', to: 'authentication_api#login'
   end 
-
-  # get '/*a', to: 'application#not_found'
 end
