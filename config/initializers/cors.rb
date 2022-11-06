@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "/api-docs/v1/swagger.yaml"
+    origins "*"
 
     resource "*",
       headers: :any,

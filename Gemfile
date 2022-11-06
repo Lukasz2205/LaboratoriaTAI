@@ -32,6 +32,8 @@ end
 
 group :development do
   gem "web-console"
+  gem 'rspec-rails'
+
   # gem "rack-mini-profiler"
   # gem "spring"
 end
