@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
   end 
 
   def destroy 
-    session[:user_id] = nil
+    session[:user_token] = nil
     redirect_to books_path, notice: 'Wylogowano'
   end 
 end 

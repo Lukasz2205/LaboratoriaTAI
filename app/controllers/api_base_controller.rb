@@ -16,18 +16,4 @@ class ApiBaseController < ApplicationController
       render json: { message: 'Invalid credentials' } 
     end 
   end 
-
-  def encode_user_data(payload)
-    token = JWT.encode payload, SECRET, "HS256"
-    return token
-  end
-
-  def decode_user_data(token)
-    begin
-      data = JWT.decode token, SECRET, true, { algorithm: "HS256" }
-      return data
-    rescue => e
-      puts e
-    end
-  end
 end 
