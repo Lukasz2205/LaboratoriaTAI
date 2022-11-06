@@ -7,9 +7,9 @@ Rails.application.routes.draw do
 
   resources :books
 
-  get '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#create'
-  get '/logout', to: 'sessions#destroy'
+  get '/login', to: 'api/authentication_api#new'
+  get '/logout', to: 'api/authentication_api#destroy'
+
 
   namespace :api do 
     resources :books_api

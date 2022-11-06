@@ -2,6 +2,9 @@ module Api
   class AuthenticationApiController < ApiBaseController
     protect_from_forgery with: :null_session
 
+    def new 
+    end 
+
     def login
       @user = User.find_by(login: params[:login])
       if @user&.authenticate(params[:password])
@@ -27,6 +30,11 @@ module Api
           end
         end 
       end
+    end 
+
+    def destroy 
+      session[:user_token]
+      redirect_to login_path, notice: 'Wylogowano'
     end 
 
     private 

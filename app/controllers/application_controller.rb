@@ -3,9 +3,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :logged_in?
 
+  # before_action :authentication
+
   def current_user
     current_user ||= User.find(decode_user_data(session[:user_token])[0]['user_data']) if session[:user_token]
-  end
+  end 
 
   def logged_in?
     !!current_user 
@@ -27,7 +29,21 @@ class ApplicationController < ActionController::Base
       data = JWT.decode token, SECRET, true, { algorithm: "HS256" }
       return data
     rescue => e
+      session[:user_token] = nil
       puts e
     end
   end
+
+  private 
+
+  def token_authentication 
+    # puts user_data
+    user_data = decode_user_data(session[:user_token])[0]['user_data'] if session[:user_token]
+    @user = User.find_by(id: user_data)
+    if @user 
+      return true 
+    else
+      redirect_to login_path, notice: 'Twoj token wygasl'
+    end 
+  end 
 end
