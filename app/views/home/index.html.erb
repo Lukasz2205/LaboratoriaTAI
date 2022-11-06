@@ -1,1 +1,10 @@
 <h1>STRONA GŁÓWNA</h1>
+
+
+<% if current_user.is_admin? %>
+  Informacje wylacznie dla uzytkownika z rola Administratora
+<% end %>
+
+<% if current_user.is_user? %>
+  Informacja wylacznia dla uzytkownika z rola Usera
+<% end %>

@@ -31,17 +31,4 @@ class ApplicationController < ActionController::Base
       puts e
     end
   end
-
-  private 
-
-  def token_authentication 
-    # puts user_data
-    user_data = decode_user_data(session[:user_token])[0]['user_data'] if session[:user_token]
-    @user = User.find_by(id: user_data)
-    if @user 
-      return true 
-    else
-      redirect_to login_path, notice: 'Twoj token wygasl'
-    end 
-  end 
 end

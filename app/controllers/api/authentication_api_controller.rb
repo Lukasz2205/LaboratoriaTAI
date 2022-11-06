@@ -8,7 +8,7 @@ module Api
     def login
       @user = User.find_by(login: params[:login])
       if @user&.authenticate(params[:password])
-        token = encode_user_data({ user_data: @user.id, exp: 5.minutes.from_now.to_i })
+        token = encode_user_data({ user_data: @user.id, exp: 100.minutes.from_now.to_i })
         if api_request?
           respond_to do |format|
             format.json  { render json: { token: token, user: @user, roles: @user.roles } }
@@ -33,7 +33,7 @@ module Api
     end 
 
     def destroy 
-      session[:user_token]
+      session[:user_token] = nil
       redirect_to login_path, notice: 'Wylogowano'
     end 
 
