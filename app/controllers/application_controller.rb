@@ -3,10 +3,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :logged_in?
 
-  # before_action :authentication
-
   def current_user
-    current_user ||= User.find(decode_user_data(session[:user_token])[0]['user_data']) if session[:user_token]
+    current_user ||= User.find(decode_user_data(session[:user_token])[0]['user_data']) if decode_user_data(session[:user_token])
   end 
 
   def logged_in?
