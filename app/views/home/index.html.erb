@@ -8,3 +8,20 @@
 <% if current_user.is_user? %>
   Informacja wylacznia dla uzytkownika z rola Usera
 <% end %>
+<br/>
+<button onclick=<%= current_user.is_admin? ? "administrator()": "noAccess()" %>>Dziala tylko dla Administratora</button>
+<button onclick=<%= current_user.is_user? ? "user()" : "noAccess()" %>>Dziala tylko dla Usera</button> 
+
+<script>
+  function noAccess() {
+    alert('Nie masz uprawnień aby wykonać tą operacje!');
+  }
+
+  function administrator() {
+    alert('Rola A – OK');
+  }
+
+  function user() {
+    alert('Rola B – OK');
+  }
+</script>
