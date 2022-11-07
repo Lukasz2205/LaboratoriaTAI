@@ -1,7 +1,6 @@
 module Api
   class BooksApiController < ApiBaseController
-    skip_before_action :verify_authenticity_token
-    before_action :authentication
+    # before_action :authentication
     before_action :set_book, only: %i[ show update destroy ]
 
     def index

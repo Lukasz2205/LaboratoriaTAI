@@ -1,8 +1,6 @@
 module Api
   class AuthenticationApiController < ApiBaseController
     SECRET = 'sekret'
-
-    protect_from_forgery with: :null_session
     before_action :authentication, except: %i[login]
 
     def new 
