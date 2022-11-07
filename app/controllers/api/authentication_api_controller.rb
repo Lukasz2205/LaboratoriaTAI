@@ -1,6 +1,9 @@
 module Api
   class AuthenticationApiController < ApiBaseController
+    SECRET = 'sekret'
+
     protect_from_forgery with: :null_session
+    before_action :authentication, except: %i[login]
 
     def new 
     end 
@@ -8,43 +11,18 @@ module Api
     def login
       @user = User.find_by(login: params[:login])
       if @user&.authenticate(params[:password])
-        token = encode_user_data({ user_data: @user.id, exp: 100.minutes.from_now.to_i })
-        if api_request?
-          respond_to do |format|
-            format.json  { render json: { token: token, user: @user, roles: @user.roles } }
-          end
-        else 
-          respond_to do |format|
-            session[:user_token] = token
-            format.html  { redirect_to(root_path, notice: 'Pomyslnie zalogowano.') }
-          end
-        end 
-      else
-        if api_request?
-          respond_to do |format|
-            format.json  { render json: { message: "invalid credentials" } }
-          end 
-        else 
-          respond_to do |format|
-            format.html  { redirect_to(login_path, notice: 'Invalid credential') }
-          end
-        end 
-      end
-    end 
-
-    def destroy 
-      session[:user_token] = nil
-      redirect_to login_path, notice: 'Wylogowano'
+        payload = { user_data: @user.id, exp: 5.minutes.from_now.to_i }
+        token = JWT.encode payload, SECRET, "HS256"
+        render json: { token: token, user: @user, roles: @user.roles }, status: :ok
+      else 
+        render json: { error: 'Brak dostępu' }, status: :unauthorized
+      end 
     end 
 
     private 
-
-    def api_request?
-      request.content_type == 'application/json'
-    end
     
     def login_params 
-      params.permit(:email, :password)
+      params.permit(:login, :password)
     end 
   end
 end 
