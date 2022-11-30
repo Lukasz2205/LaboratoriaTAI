@@ -1,12 +1,12 @@
 module Api
+  require 'csv'
   class BooksApiController < ApiBaseController
     # before_action :authentication
     before_action :set_book, only: %i[ show update destroy ]
 
     def index
       @books = Book.all
-
-      render json: { books: @books, user: @user  }
+      render json: { books: @books, user: @user }, status: :ok
     end
 
     def show

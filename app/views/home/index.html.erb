@@ -1,27 +1,2 @@
 <h1>STRONA GŁÓWNA</h1>
-
-
-<% if current_user.is_admin? %>
-  Informacje wylacznie dla uzytkownika z rola Administratora
-<% end %>
-
-<% if current_user.is_user? %>
-  Informacja wylacznia dla uzytkownika z rola Usera
-<% end %>
-<br/>
-<button onclick=<%= current_user.is_admin? ? "administrator()": "noAccess()" %>>Dziala tylko dla Administratora</button>
-<button onclick=<%= current_user.is_user? ? "user()" : "noAccess()" %>>Dziala tylko dla Usera</button> 
-
-<script>
-  function noAccess() {
-    alert('Nie masz uprawnień aby wykonać tą operacje!');
-  }
-
-  function administrator() {
-    alert('Rola A – OK');
-  }
-
-  function user() {
-    alert('Rola B – OK');
-  }
-</script>
+<a href="/export_books.csv">Export CSV</a>

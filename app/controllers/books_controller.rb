@@ -1,6 +1,8 @@
+require 'csv'
+require 'rails/all'
 class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy ]
-  before_action :require_user
+  # before_action :require_user
 
   def index
     @books = Book.all
@@ -33,6 +35,17 @@ class BooksController < ApplicationController
       render :edit, notice: 'Something went wrong'
     end
   end
+
+  def export_books 
+    @books = Book.all
+    respond_to do |format|
+      format.csv do 
+        response.headers['Content-Type'] = 'text/csv'
+        response.headers['Content-Disposition'] = "attachment; fiename=export_books.csv"
+        render template: "layouts/export_books"
+      end 
+    end 
+  end 
 
   def destroy
     @book.destroy
