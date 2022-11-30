@@ -36,12 +36,26 @@ class BooksController < ApplicationController
     end
   end
 
+  def import_books 
+    csv_text = File.read('/home/lukasz/Pobrane/export_books(23).csv')
+    csv = CSV.parse(csv_text, :headers => true, :encoding => "ISO-8859-1")
+    csv.each do |row|
+      t = Book.new
+      t.name        = row["Name"]
+      t.description = row["Description"]
+      t.pages       = row["Pages"]
+      t.author      = row["Author"]
+      t.price       = row["Price"]
+      t.save unless t.name.nil?
+    end 
+    render json: { message: 'Pomyślnie dodano nowe rekordy' }, status: :ok
+  end 
+
   def export_books 
     @books = Book.all
     respond_to do |format|
       format.csv do 
         response.headers['Content-Type'] = 'text/csv'
-        response.headers['Content-Disposition'] = "attachment; fiename=export_books.csv"
         render template: "layouts/export_books"
       end 
     end 

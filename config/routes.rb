@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :books 
   get 'export_books', to: 'books#export_books'
+  post 'import_books', to: 'books#import_books'
 
   get '/login', to: 'api/authentication_api#new'
   get '/logout', to: 'api/authentication_api#destroy'

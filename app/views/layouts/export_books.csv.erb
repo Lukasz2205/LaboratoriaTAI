@@ -1,10 +1,9 @@
-<% headers = ['Name', 'Description', 'Pages', 'Author', 'Price', 'Date'] %>
+<% headers = ['Name', 'Description', 'Pages', 'Author', 'Price'] %>
 <%= CSV.generate_line headers %>
 <% @books.each do |book| %>
   <%= CSV.generate_line([book.name,
                           book.description,
                           book.pages,
                           book.author,
-                          book.price,
-                          book.created_at])%>
+                          book.price])%>
 <% end %>
