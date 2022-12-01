@@ -36,19 +36,26 @@ class BooksController < ApplicationController
     end
   end
 
-  def import_books 
-    csv_text = File.read('/home/lukasz/Pobrane/export_books(23).csv')
+  def import_books
+    csv_text = File.read(params[:books_file])
+    puts 'asdasd'
+    puts csv_text
     csv = CSV.parse(csv_text, :headers => true, :encoding => "ISO-8859-1")
+    count = 0 
     csv.each do |row|
       t = Book.new
-      t.name        = row["Name"]
-      t.description = row["Description"]
-      t.pages       = row["Pages"]
-      t.author      = row["Author"]
-      t.price       = row["Price"]
-      t.save unless t.name.nil?
+      t.name        = row["Name"].nil? ? '' : row["Name"] 
+      t.description = row["Description"].nil? ? '' : row["Description"] 
+      t.pages       = row["Pages"].nil? ? 0 : row["Pages"]  
+      t.author      = row["Author"].nil? ? '' : row["Author"] 
+      t.price       = row["Price"].nil? ? 0 : row["Price"] 
+      unless t.name.nil?
+        if t.save 
+          count += 1
+        end 
+      end 
     end 
-    render json: { message: 'Pomyślnie dodano nowe rekordy' }, status: :ok
+    render json: { message: "Pomyślnie dodano #{count} nowe rekordy" }, status: :ok
   end 
 
   def export_books 
